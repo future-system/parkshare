@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: system_api
+    environment:
+      POSTGRES_USER: root        # Usuário do banco de dados
+      POSTGRES_PASSWORD: root    # Senha do usuário
+      POSTGRES_DB: parkshare    # Nome do banco de dados
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
