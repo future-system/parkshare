@@ -1,0 +1,57 @@
+package br.com.system.parkshare.security;
+
+import java.time.Instant;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.stereotype.Component;
+
+import br.com.system.parkshare.account.Account;
+
+
+@Component
+public abstract class Token {
+
+    public static Instant generateTokenExpirationTime() {
+        return Instant.now().plusSeconds(3600);// 1 hora
+    }
+
+    public static JwtClaimsSet generateTokenClaims(Account usuario) {
+        return JwtClaimsSet.builder()
+                .issuer("system-api")
+                .issuedAt(Instant.now())
+                .expiresAt(generateTokenExpirationTime())
+                .subject(usuario.getNickname())
+                .claim("idAccount", usuario.getIdAccount().toString())
+                .claim("email", usuario.getEmail())
+                .claim("authorities",
+                        usuario.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static String generateTokenJWT(JwtEncoder jwtEncoder, Account usuario) {
+        return jwtEncoder.encode(JwtEncoderParameters.from(generateTokenClaims(usuario))).getTokenValue();
+    }
+
+    public static Object getClaimFromToken(JwtAuthenticationToken token, String nameClaim) {
+        return token.getTokenAttributes().get(nameClaim);
+    }
+
+    public static UUID getidApp(JwtAuthenticationToken token) {
+
+        return UUID.fromString(getClaimFromToken(token, "idApp").toString());
+    }
+
+    public static UUID getidAccount(JwtAuthenticationToken token) {
+
+        return UUID.fromString(getClaimFromToken(token, "idAccount").toString());
+
+    }
+}
