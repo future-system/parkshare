@@ -19,12 +19,6 @@ import lombok.Setter;
 public class AccountCardPayment extends AccountPayment {
 
     @NotBlank
-    private String name;
-
-    @NotBlank
-    private String subname;
-
-    @NotBlank
     @Size(min = 16, max = 16, message = "O número do cartão deve ter 16 dígitos")
     @Column(name = "card_number", nullable = false, unique = true)
     private String cardNumber;

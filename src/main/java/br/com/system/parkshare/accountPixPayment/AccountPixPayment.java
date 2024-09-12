@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,21 +19,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AccountPixPayment extends AccountPayment {
 
-    @NotBlank
-    @Column(name = "pix_key", nullable = false, unique = true)
-    private String pixKey;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "pix_key_type", nullable = false)
-    private PixKeyType pixKeyType;
+    private PixKey pixKey; 
 
-    @NotBlank
-    private String name;
-
-    @NotBlank
-    private String subname;
-
-    public enum PixKeyType {
+    public enum PixKey {
         CPF,
         CNPJ,
         EMAIL,
