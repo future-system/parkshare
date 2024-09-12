@@ -1,8 +1,8 @@
 package br.com.system.parkshare.account;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -17,19 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import br.com.system.parkshare.imageAccount.ImageAccount;
+import br.com.system.parkshare.accountPayment.AccountPayment;
+import br.com.system.parkshare.cellphone.Cellphone;
 import br.com.system.parkshare.role.Role;
 import br.com.system.parkshare.security.AuthDTO;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -72,6 +65,15 @@ public class Account implements UserDetails {
 
     @NotBlank
     private Date birthday;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Cellphone> cellphones;
+
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private ImageAccount imageAccount;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<AccountPayment> payments;
     
     @CreationTimestamp
     private LocalDateTime dateTimeCreated;
