@@ -52,7 +52,7 @@ public class SecurityConfigurations {
         return http.csrf(t -> t.disable()).httpBasic(t -> t.disable()).formLogin(t -> t.disable())
                 .authorizeHttpRequests(
                         t -> {
-                            t.requestMatchers("/auth/**").permitAll()
+                            t.requestMatchers("/api/auth/v1/**").permitAll()
                                     .anyRequest().authenticated();
                             // t.requestMatchers("/admin/**").hasRole("ADMIN")
                             // .requestMatchers("/app/**").hasRole("APP")
@@ -70,7 +70,7 @@ public class SecurityConfigurations {
                 // .authenticationProvider(authenticationProvider)
                 .addFilterBefore(filterSecurity, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .logout(logout -> logout.logoutUrl("/v1/auth/logout")
+                .logout(logout -> logout.logoutUrl("api/v1/auth/logout")
                         .logoutSuccessHandler(
                                 (request, response, authentication) -> SecurityContextHolder.clearContext()))
                 .build();

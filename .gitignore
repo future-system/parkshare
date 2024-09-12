@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### PROJETO ### 
+rsa.private
+rsa.public
 ### STS ###
 .apt_generated
 .classpath

@@ -60,14 +60,10 @@ public class FilterSecurity extends OncePerRequestFilter {
     }
 
     public UsernamePasswordAuthenticationToken validateToken(String token) {
-        Algorithm algorithm = Algorithm.RSA256(publicKey);
 
-        JWTVerifier verifier = JWT.require(algorithm).build();
+        final DecodedJWT decoded = JWT.require(Algorithm.RSA256(publicKey)).build().verify(token);
 
-        DecodedJWT decoded = verifier.verify(token);
-
-        Account user = accountService.loadUserByLoginAndIdApp(UUID.fromString(decoded.getClaim("idApp").asString()),
-                decoded.getSubject());
+        final Account user = accountService.loadUserByEmail(decoded.getSubject());
 
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }

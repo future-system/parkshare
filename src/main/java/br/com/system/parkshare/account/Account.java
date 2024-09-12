@@ -1,7 +1,7 @@
 package br.com.system.parkshare.account;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
@@ -46,7 +46,6 @@ public class Account implements UserDetails {
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "id_account"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles;
 
-    @NotBlank
     @CPF
     @Column(unique = true)
     private String cpf;
@@ -63,8 +62,8 @@ public class Account implements UserDetails {
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
-    @NotBlank
-    private Date birthday;
+    @Column
+    private LocalDate birthday;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Cellphone> cellphones;
@@ -125,6 +124,6 @@ public class Account implements UserDetails {
 
     @Override
     public String getUsername() {
-        return nickname;
+        return email;
     }
 }

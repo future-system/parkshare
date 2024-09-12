@@ -19,7 +19,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/auth/v1/{idApp}/")
+@RequestMapping("api/auth/v1/")
 public class AuthController {
 
     @Autowired
@@ -30,16 +30,16 @@ public class AuthController {
 
     @PostMapping("/login")
     @Transactional
-    public ResponseEntity<AuthTokenJWT> login(@PathVariable UUID idApp, @RequestBody @Valid AuthDTO account) {
+    public ResponseEntity<AuthTokenJWT> login(@RequestBody @Valid AuthDTO account) {
         return ResponseEntity.ok(
-                new AuthTokenJWT(Token.generateTokenJWT(jwtEncoder, service.makeLogin(account, idApp, account.login())),
+                new AuthTokenJWT(Token.generateTokenJWT(jwtEncoder, service.makeLogin(account)),
                         Token.generateTokenExpirationTime()));
     }
 
     @PostMapping("/signin")
     @Transactional
-    public ResponseEntity<Account> create(@PathVariable UUID idApp, @RequestBody @Valid Account account) {
-        return service.create(idApp, account);
+    public ResponseEntity<Account> create(@RequestBody @Valid Account account) {
+        return service.create(account);
     }
 
 }

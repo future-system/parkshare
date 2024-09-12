@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.system.parkshare.security.Token;
 import br.com.system.parkshare.utils.response.Return;
 import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping("/v1/account/")
+@RequestMapping("api/v1/account/")
 public class AccountController {
 
     @Autowired
@@ -32,10 +31,8 @@ public class AccountController {
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             JwtAuthenticationToken token) {
 
-
-        final var users = service.getRepository().findAllByAppIdApp(
-                UUID.fromString(Token.getClaimFromToken(token, "idApp").toString()),
-                PageRequest.of(page, pageSize, Direction.DESC, "dateTimeAccess"));
+        final var users = service.getRepository()
+                .findAll(PageRequest.of(page, pageSize, Direction.DESC, "dateTimeAccess", "nickname"));
 
         return ResponseEntity
                 .ok(new Return(users.toList(), page, pageSize, users.getTotalPages(), users.getTotalElements()));
