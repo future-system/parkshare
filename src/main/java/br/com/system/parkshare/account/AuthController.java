@@ -1,6 +1,8 @@
 package br.com.system.parkshare.account;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.system.parkshare.security.AuthDTO;
 import br.com.system.parkshare.security.AuthTokenJWT;
 import br.com.system.parkshare.security.Token;
-
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 

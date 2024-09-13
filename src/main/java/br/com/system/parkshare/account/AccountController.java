@@ -1,7 +1,6 @@
 package br.com.system.parkshare.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.UUID;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
