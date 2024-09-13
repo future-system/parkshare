@@ -1,6 +1,7 @@
 package br.com.system.parkshare.security;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,8 @@ public abstract class Token {
                 .claim("nickname", usuario.getNickname())
                 .claim("email", usuario.getEmail())
                 .claim("username", usuario.getUsername())
-                .claim("phones", usuario.getCellphones())
+                .claim("phones", usuario.getCellphones() == null ? new ArrayList<>() : usuario.getCellphones().stream()
+                        .map(cellphone -> cellphone.getCellphone()).collect(Collectors.toList()))  
                 //.claim("dateTimeCreated", usuario.getDateTimeCreated())
                 .claim("authorities",
                         usuario.getAuthorities().stream()

@@ -34,8 +34,15 @@ public class AuthController {
 
     @PostMapping("/signin")
     @Transactional
-    public ResponseEntity<Account> create(@RequestBody @Valid Account account) {
-        return service.create(account);
+    public ResponseEntity<AccountWithToken> create(@RequestBody @Valid Account account) {
+        final Account accountCreated = service.create(account);
+        
+        return ResponseEntity
+                .ok(new AccountWithToken(account, new AuthTokenJWT(Token.generateTokenJWT(jwtEncoder, accountCreated),
+                        Token.generateTokenExpirationTime())));
+    }
+
+    public record AccountWithToken(Account account, AuthTokenJWT token) {
     }
 
 }

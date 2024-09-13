@@ -32,7 +32,7 @@ public class AccountService {
         return repository;
     }
 
-    public ResponseEntity<Account> create(Account user) {
+    public Account create(Account user) {
 
         if (!repository.findByEmail(user.getEmail()).isEmpty()) {
             throw new EntityNotFoundException("Usuário com e-mail " + user.getEmail() + " já cadastrado");
@@ -44,7 +44,7 @@ public class AccountService {
 
         // user.setRoles(Set.of(roleRepository.findByName(Role.Values.USER.name())));
 
-        return ResponseEntity.ok(repository.save(user));
+        return repository.save(user);
     }
 
     public Account create(AccountDto dto) {
