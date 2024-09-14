@@ -27,7 +27,7 @@ public class Client {
     private UUID idClient;
 
     @NotBlank
-    @Email
+    @Email 
     @Column(unique = true)
     private String email;
 

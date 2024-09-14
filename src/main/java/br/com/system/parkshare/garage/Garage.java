@@ -1,6 +1,7 @@
 package br.com.system.parkshare.garage;
 
 import br.com.system.parkshare.associated.Associated;
+import br.com.system.parkshare.imageGarage.ImageGarage;
 import br.com.system.parkshare.parking.Parking;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,9 @@ public class Garage {
 
     @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Parking> parkings;
+
+    @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ImageGarage> imageGarage;
 
     @Column(name = "name")
     private String name;
