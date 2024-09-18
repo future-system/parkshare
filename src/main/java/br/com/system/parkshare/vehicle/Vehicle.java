@@ -25,8 +25,8 @@ public class Vehicle {
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "plate")
+    private String plate;
 
     @Column(name = "type")
     private String type;
