@@ -17,14 +17,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import br.com.system.parkshare.imageAccount.ImageAccount;
 import br.com.system.parkshare.accountPayment.AccountPayment;
-import br.com.system.parkshare.associated.Associated;
 import br.com.system.parkshare.cellphone.Cellphone;
-import br.com.system.parkshare.client.Client;
+import br.com.system.parkshare.imageAccount.ImageAccount;
 import br.com.system.parkshare.role.Role;
 import br.com.system.parkshare.security.AuthDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -47,12 +57,6 @@ public class Account implements UserDetails {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "id_account"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Client client;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Associated associated;
 
     @CPF
     @Column(unique = true)

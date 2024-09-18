@@ -2,6 +2,8 @@ package br.com.system.parkshare.vehicle;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.system.parkshare.client.Client;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,10 +24,11 @@ public class Vehicle {
     private UUID idVehicle;
 
     @ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "id_client")
     private Client client;
 
-    @Column(name = "plate")
+    @Column(name = "plate", unique = true)
     private String plate;
 
     @Column(name = "model")
