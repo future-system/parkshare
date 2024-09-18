@@ -28,6 +28,15 @@ public class Vehicle {
     @Column(name = "plate")
     private String plate;
 
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "brand")
+    private String brand;    
+
+    @Column(name = "color")
+    private String color;
+
     @Column(name = "type")
     private String type;
 
