@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Component;
 
 import br.com.system.parkshare.account.Account;
-
+import br.com.system.parkshare.cellphone.Cellphone;
 
 @Component
 public abstract class Token {
@@ -32,9 +32,10 @@ public abstract class Token {
                 .claim("nickname", usuario.getNickname())
                 .claim("email", usuario.getEmail())
                 .claim("username", usuario.getUsername())
-                .claim("phones", usuario.getCellphones() == null ? new ArrayList<>() : usuario.getCellphones().stream()
-                        .map(cellphone -> cellphone.getCellphone()).collect(Collectors.toList()))  
-                //.claim("dateTimeCreated", usuario.getDateTimeCreated())
+                .claim("phones", usuario.getCellphones() == null ? new ArrayList<>()
+                        : usuario.getCellphones().stream()
+                                .map(Cellphone::getCellphone).collect(Collectors.toList()))
+                // .claim("dateTimeCreated", usuario.getDateTimeCreated())
                 .claim("authorities",
                         usuario.getAuthorities().stream()
                                 .map(GrantedAuthority::getAuthority)
