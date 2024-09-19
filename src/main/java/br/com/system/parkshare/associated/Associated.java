@@ -1,5 +1,6 @@
 package br.com.system.parkshare.associated;
 
+import br.com.system.parkshare.account.Account;
 import br.com.system.parkshare.garage.Garage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,9 @@ public class Associated {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_associated")
     private UUID idAssociated;
+
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Account account;
 
     @Column(name = "description")
     private String description;

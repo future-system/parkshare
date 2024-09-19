@@ -55,4 +55,10 @@ public class Garage {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
 }

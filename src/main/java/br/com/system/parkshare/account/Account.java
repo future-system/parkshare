@@ -57,7 +57,7 @@ public class Account implements UserDetails {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "id_account"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles;
-
+    
     @CPF
     @Column(unique = true)
     private String cpf;

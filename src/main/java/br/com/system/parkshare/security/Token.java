@@ -51,11 +51,6 @@ public abstract class Token {
         return token.getTokenAttributes().get(nameClaim);
     }
 
-    public static UUID getidApp(JwtAuthenticationToken token) {
-
-        return UUID.fromString(getClaimFromToken(token, "idApp").toString());
-    }
-
     public static UUID getidAccount(JwtAuthenticationToken token) {
 
         return UUID.fromString(getClaimFromToken(token, "idAccount").toString());
