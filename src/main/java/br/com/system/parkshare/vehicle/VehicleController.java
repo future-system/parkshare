@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,17 @@ public class VehicleController {
     @PostMapping
     @Transactional
     public ResponseEntity<List<Vehicle>> createVehicle(JwtAuthenticationToken token, @RequestBody Vehicles vehicles) {
+
         List<Vehicle> res = service.createVehicle(Token.getidAccount(token), vehicles.vehicles());
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    }
+
+    @GetMapping
+    @Transactional
+    public ResponseEntity<List<Vehicle>> getVehicles(JwtAuthenticationToken token) {
+
+        List<Vehicle> res = service.getVehicles(Token.getidAccount(token));
+        return ResponseEntity.status(HttpStatus.FOUND).body(res);
     }
 
     public record Vehicles(List<Vehicle> vehicles) {

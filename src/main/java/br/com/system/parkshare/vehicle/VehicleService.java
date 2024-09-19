@@ -21,7 +21,7 @@ public class VehicleService {
     public List<Vehicle> createVehicle(UUID idAccount, List<Vehicle> vehicles) {
 
         Client client = clientRepository.findByAccountIdAccount(idAccount)
-        .orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada"));
 
         for (Vehicle vehicle : vehicles) {
             vehicle.setClient(client);
@@ -29,4 +29,14 @@ public class VehicleService {
 
         return repository.saveAll(vehicles);
     }
+
+    public List<Vehicle> getVehicles(UUID idAccount) {
+        
+        Client client = clientRepository.findByAccountIdAccount(idAccount)
+        .orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada"));
+
+        return repository.findByClientIdClient(client.getIdClient());
+
+    }
+
 }
