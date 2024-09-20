@@ -1,16 +1,14 @@
 package br.com.system.parkshare.garage;
 
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.com.system.parkshare.account.AccountRepository;
-import br.com.system.parkshare.account.AccountService;
 import br.com.system.parkshare.associated.AssociatedService;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class GarageService {
