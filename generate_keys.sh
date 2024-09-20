@@ -12,4 +12,4 @@ ls -l;
 
 cd ../../..;
 
-echo "Keys generated successfully";
+echo "Keys generated successfully"; 

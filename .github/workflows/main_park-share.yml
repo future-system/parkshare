@@ -40,13 +40,13 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: rsa-public
-          path: rsa.public
+          path: src/main/resources/rsa.public
 
       - name: Upload RSA private key
         uses: actions/upload-artifact@v3
         with:
           name: rsa-private
-          path: rsa.private
+          path: src/main/resources/rsa.private
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
