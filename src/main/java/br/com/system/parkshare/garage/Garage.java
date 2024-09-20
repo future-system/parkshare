@@ -29,36 +29,36 @@ public class Garage {
     @JoinColumn(name = "id_associated", nullable = false)
     private Associated associated;
 
-    @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "garage", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Parking> parkings;
 
-    @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "garage", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<ImageGarage> imageGarage;
 
-    @Column(name = "name")
+    @Column(name = "name",  nullable = false)
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price",  nullable = false)
     private float price;
 
-    @Column(name = "street")
+    @Column(name = "street",  nullable = false)
     private String street;
 
-    @Column(name = "block")
+    @Column(name = "block",  nullable = false)
     private String block;
 
-    @Column(name = "number")
+    @Column(name = "number",  nullable = false)
     private int number;
 
-    @Column(name = "state")
+    @Column(name = "state",  nullable = false)
     private String state;
 
-    @Column(name = "description")
+    @Column(name = "description",  nullable = false)
     private String description;
 
-    @Column(name = "latitude")
+    @Column(name = "latitude",  nullable = false)
     private double latitude;
 
-    @Column(name = "longitude")
+    @Column(name = "longitude",  nullable = false)
     private double longitude;
 }
