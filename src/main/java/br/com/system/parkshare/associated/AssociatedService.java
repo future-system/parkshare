@@ -36,7 +36,11 @@ public class AssociatedService {
     }
 
     public Associated findById(UUID id) {
-        return associatedRepository.findById(id).orElseThrow(() -> new RuntimeException("Associado não encontrado"));
+        return associatedRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Associado não encontrado"));
+    }
+
+    public Associated findByIdAccount(UUID idAccount) {
+        return associatedRepository.findByAccount(accountRepository.findById(idAccount).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada"))).orElseThrow(() -> new EntityNotFoundException("Associado não encontrado"));
     }
 
     public Iterable<Associated> findAll() {
