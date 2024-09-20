@@ -32,6 +32,9 @@ jobs:
       # Passo para rodar o script
       - name: Run generate_keys.sh
         run: ./generate_keys.sh
+      
+      - name: List files to verify RSA keys
+        run: ls -la
 
       - name: Upload RSA public key
         uses: actions/upload-artifact@v3
