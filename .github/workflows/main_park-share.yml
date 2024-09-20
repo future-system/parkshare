@@ -36,6 +36,20 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
+      - name: Upload key public for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/src/main/resources/rsa.public'
+
+      - name: Upload key private for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/src/main/resources/rsa.private'
+
+        
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -55,5 +69,5 @@ jobs:
         with:
           app-name: 'park-share'
           slot-name: 'Production'
-          package: '*.jar'
+          package: '*.jar, rsa.public, rsa.private'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86DE118439A543F2996E6592F3D222C3 }}
