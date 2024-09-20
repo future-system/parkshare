@@ -33,6 +33,18 @@ jobs:
       - name: Run generate_keys.sh
         run: ./generate_keys.sh
 
+      - name: Upload RSA public key
+        uses: actions/upload-artifact@v3
+        with:
+          name: rsa-public
+          path: rsa.public
+
+      - name: Upload RSA private key
+        uses: actions/upload-artifact@v3
+        with:
+          name: rsa-private
+          path: rsa.private
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -41,7 +53,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, ]
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -51,6 +63,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+
+      - name: Download RSA public key
+        uses: actions/download-artifact@v3
+        with:
+          name: rsa-public
+
+      - name: Download RSA private key
+        uses: actions/download-artifact@v3
+        with:
+          name: rsa-private
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
