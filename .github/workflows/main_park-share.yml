@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'park-share'
           slot-name: 'Production'
-          package: '*.jar, rsa.public, rsa.private'
+          package: '*.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86DE118439A543F2996E6592F3D222C3 }}
