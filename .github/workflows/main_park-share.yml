@@ -1,4 +1,4 @@
-name: Build and deploy JAR app to Azure Web App - park-share
+name: Build and deploy JAR app to Azure Web App  -  park-share
 
 on:
   push:
