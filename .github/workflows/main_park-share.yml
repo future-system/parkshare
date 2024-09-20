@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - /src/main/resources/rsa.private
+      - /src/main/resources/rsa.public
   workflow_dispatch:
 
 jobs:
@@ -35,20 +38,6 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
-
-      - name: Upload key public for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/src/main/resources/rsa.public'
-
-      - name: Upload key private for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/src/main/resources/rsa.private'
-
-        
 
   deploy:
     runs-on: ubuntu-latest
