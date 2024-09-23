@@ -107,16 +107,6 @@
     </dependencies>
 
 	<build>
-		
-		<resources>
-			<resource>
-			  <directory>resources</directory>
-			  <includes>                      
-                <include>**/*</include>                  
-            </includes>
-			</resource>
-			</resources>
-
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
