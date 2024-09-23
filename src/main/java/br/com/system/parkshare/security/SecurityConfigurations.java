@@ -27,16 +27,19 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 
+import br.com.system.parkshare.security.keys.PrivateKeyConverter;
+import br.com.system.parkshare.security.keys.PublicKeyConverter;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurations {
 
     @Value("${security.public.key}")
-    private RSAPublicKey publicKey;
+    private String publicKey;
 
     @Value("${security.private.key}")
-    private RSAPrivateKey privateKey;
+    private String privateKey;
 
     // @Autowired
     // private AccountService accountService;
@@ -88,13 +91,13 @@ public class SecurityConfigurations {
 
     @Bean
     public JwtDecoder jwtDencoder() {
-        return NimbusJwtDecoder.withPublicKey(publicKey).build();
+        return NimbusJwtDecoder.withPublicKey(new PublicKeyConverter().convert(publicKey)).build();
     }
 
     @Bean
     public JwtEncoder jwtEncoder() {
         return new NimbusJwtEncoder(
-                new ImmutableJWKSet<>(new JWKSet(new RSAKey.Builder(publicKey).privateKey(privateKey).build())));
+                new ImmutableJWKSet<>(new JWKSet(new RSAKey.Builder(new PublicKeyConverter().convert(publicKey)).privateKey(new PrivateKeyConverter().convert(privateKey)).build())));
     }
 
     @Bean
