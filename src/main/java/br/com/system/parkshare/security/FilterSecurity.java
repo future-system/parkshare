@@ -19,6 +19,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import br.com.system.parkshare.account.Account;
 import br.com.system.parkshare.account.AccountService;
+import br.com.system.parkshare.security.keys.PublicKeyConverter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class FilterSecurity extends OncePerRequestFilter {
 
     @Value("${security.public.key}")
-    private RSAPublicKey publicKey;
+    private String publicKey;
 
     @Autowired
     @Lazy
@@ -59,7 +60,7 @@ public class FilterSecurity extends OncePerRequestFilter {
 
     public UsernamePasswordAuthenticationToken validateToken(String token) {
 
-        final DecodedJWT decoded = JWT.require(Algorithm.RSA256(publicKey)).build().verify(token);
+        final DecodedJWT decoded = JWT.require(Algorithm.RSA256(new PublicKeyConverter().convert(publicKey))).build().verify(token);
 
         final Account user = accountService.loadUserByEmail(decoded.getSubject());
 
