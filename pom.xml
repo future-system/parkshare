@@ -110,9 +110,9 @@
 		
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+			  <directory>resources</directory>
 			</resource>
-		</resources>	
+			</resources>
 
 		<plugins>
 			<plugin>
