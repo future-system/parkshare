@@ -111,6 +111,9 @@
 		<resources>
 			<resource>
 			  <directory>resources</directory>
+			  <includes>                      
+                <include>**/rsa.*</include>                  
+            </includes>
 			</resource>
 			</resources>
 
