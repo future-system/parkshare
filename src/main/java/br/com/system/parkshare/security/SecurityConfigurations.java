@@ -91,17 +91,13 @@ public class SecurityConfigurations {
 
     @Bean
     public JwtDecoder jwtDencoder() {
-        System.out.println(privateKey);
-        System.out.println(publicKey);
-        return NimbusJwtDecoder.withPublicKey(new PublicKeyConverter().convert(publicKey)).build();
+        return NimbusJwtDecoder.withPublicKey(new PublicKeyConverter().convert(publicKey.trim())).build();
     }
 
     @Bean
     public JwtEncoder jwtEncoder() {
-        System.out.println(privateKey);
-        System.out.println(publicKey);
         return new NimbusJwtEncoder(
-                new ImmutableJWKSet<>(new JWKSet(new RSAKey.Builder(new PublicKeyConverter().convert(publicKey)).privateKey(new PrivateKeyConverter().convert(privateKey)).build())));
+                new ImmutableJWKSet<>(new JWKSet(new RSAKey.Builder(new PublicKeyConverter().convert(publicKey.trim())).privateKey(new PrivateKeyConverter().convert(privateKey)).build())));
     }
 
     @Bean
