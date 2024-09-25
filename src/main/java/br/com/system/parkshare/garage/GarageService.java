@@ -53,6 +53,10 @@ public class GarageService {
         return garageRepository.findAll(PageRequest.of(page, pageSize, Direction.DESC, "associated.account.nickname"));
     }
 
+    public Page<Garage> findAllByName(String garage, int page, int pageSize) {
+        return garageRepository.findAllByNameContainsIgnoreCase(garage, PageRequest.of(page, pageSize, Direction.DESC, "name"));
+    }
+
     public Garage update(UUID id, String name, float price, String street, String block, int number, String state,
     String description, double latitude, double longitude) {
         final Garage garage = findById(id);

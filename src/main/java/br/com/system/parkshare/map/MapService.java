@@ -1,6 +1,7 @@
 package br.com.system.parkshare.map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import br.com.system.parkshare.garage.Garage;
@@ -21,6 +22,11 @@ public class MapService {
     public Iterable<Garage> findGarages(double minLat, double maxLat, double minLon, double maxLon) {
         return garageService.findByLatitudeBetweenAndLongitudeBetween(minLat, maxLat, minLon, maxLon);
     }
+
+    public Page<Garage> findGarages(String name, int page, int size) {
+        return garageService.findAllByName(name, page, size);
+    }
+
 
     public double[] calculateBounds(double latitude, double longitude, int zoom) {
         double latitudeCoverage = 360.0 / Math.pow(2, zoom);
