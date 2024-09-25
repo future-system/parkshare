@@ -70,4 +70,8 @@ public class GarageService {
         return garageRepository.save(garage);
     }
 
+    public Iterable<Garage> findByLatitudeBetweenAndLongitudeBetween(double minLat, double maxLat, double minLon,
+            double maxLon) {
+        return garageRepository.findByLatitudeBetweenAndLongitudeBetween(minLat, maxLat, minLon, maxLon);
+    }
 }
