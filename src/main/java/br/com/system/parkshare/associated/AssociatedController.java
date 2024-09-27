@@ -21,7 +21,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/associated/")
+@RequestMapping("api/v1/associated")
 public class AssociatedController {
 
     @Autowired
