@@ -48,5 +48,5 @@ public class Schedule {
     private LocalDateTime finishDateTime;
 
     @Column(name = "status")
-    private String status;
+    private String status; // E para esperando aprovação A para aprovado C para cancelado/reprovado
 }

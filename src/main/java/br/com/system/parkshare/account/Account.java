@@ -96,7 +96,7 @@ public class Account implements UserDetails {
     private LocalDateTime dateTimeAccess;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT true")
-    private boolean isActive;
+    private boolean active;
 
     @Override
     public Collection<SimpleGrantedAuthority> getAuthorities() {

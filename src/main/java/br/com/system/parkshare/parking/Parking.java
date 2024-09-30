@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "parking")
 @Getter
@@ -22,6 +24,7 @@ public class Parking {
     @Column(name = "id_parking")
     private UUID idParking;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_garage", nullable = false)
     private Garage garage;

@@ -12,7 +12,7 @@ import br.com.system.parkshare.security.Token;
 import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping("api/v1/client/")
+@RequestMapping("api/v1/client")
 public class ClientController {
 
     @Autowired
