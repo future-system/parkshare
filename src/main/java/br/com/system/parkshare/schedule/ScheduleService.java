@@ -33,11 +33,10 @@ public class ScheduleService {
     @Autowired
     private ParkingRepository parkingRepository;
 
-    @Autowired
-    private Schedule schedule;
-
     public Schedule create(UUID idAccount, UUID idParking, LocalDate day, LocalDateTime init, LocalDateTime finish)
             throws Exception {
+
+        final Schedule schedule = new Schedule();
 
         Validation.validAccount(accountRepository, idAccount);
 
